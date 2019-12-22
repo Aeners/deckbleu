@@ -62,7 +62,8 @@ class HelloWorld extends StatelessWidget {
               ),
               titleSection,
               buttonSection,
-              textSection
+              // textSection,
+              ShapeShifterContainer()
             ]
           ),
         ));
@@ -120,5 +121,79 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
         )
       ],
     );
+  }
+}
+
+class ShapeShifterContainer extends StatefulWidget {
+  @override
+  _ShapeShifterContainerState createState() => _ShapeShifterContainerState();
+}
+
+
+class _ShapeShifterContainerState extends State<ShapeShifterContainer> {
+  bool _isDefault = true;
+
+  void _handleShift() {
+      setState(() {
+        _isDefault = !_isDefault;
+      });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(32),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Shape(isDefault: _isDefault),
+          Shifter(handleShift: _handleShift)
+        ]
+      )
+    );
+  }
+}
+
+class Shape extends StatefulWidget {
+  Shape({@required this.isDefault});
+
+  final bool isDefault;
+
+  @override
+  _ShapeState createState() => _ShapeState();
+}
+
+class _ShapeState extends State<Shape> {
+  Color _blue = Colors.blue[300];
+  Color _red = Colors.red[300];
+  Radius _squareRadius = Radius.zero;
+  Radius _circleRadius = Radius.circular(50);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+        duration: const Duration(seconds: 1),
+        curve: Curves.easeInExpo,
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          color: widget.isDefault ? _red : _blue,
+          borderRadius: BorderRadius.all(
+            widget.isDefault ? _squareRadius : _circleRadius
+          ), 
+        ),
+    );
+  }
+}
+
+class Shifter extends StatelessWidget {
+  Shifter({Key key, @required this.handleShift})
+      : super(key: key);
+
+  final Function handleShift;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(icon: Icon(Icons.pie_chart), color: Colors.blue[300], onPressed: handleShift);
   }
 }
