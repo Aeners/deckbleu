@@ -27,7 +27,7 @@ class OptionsEntry extends StatelessWidget {
             )),
         onTap: disabled
             ? null
-            : () {
+            : () async {
                 Navigator.pushNamed(context, pathToNavigate);
               });
   }

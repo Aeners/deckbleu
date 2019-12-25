@@ -11,32 +11,24 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreen extends State<MenuScreen> {
   bool showMenu = false;
   bool enoughPlayers = false;
-
-  @override
-  void initState() {
-    _getNumberOfPlayers();
-    super.initState();
-  }
+  DatabaseHelper helper = DatabaseHelper.instance;
 
   _getNumberOfPlayers() async {
-    DatabaseHelper helper = DatabaseHelper.instance;
     int players = await helper.queryNumberOfPlayers();
-    print("Number of Players => $players");
-    if (players >= 2) {
-      enoughPlayers = true;
-    } else {
+    if (players >= 2 && !enoughPlayers) {
+      setState(() => enoughPlayers = true);
+    } else if (players < 2) {
       print('Not enough player to play');
     }
   }
 
   _handleImageOnTap() {
-    setState(() {
-      showMenu = true;
-    });
+    setState(() => showMenu = true);
   }
 
   @override
   Widget build(BuildContext context) {
+    _getNumberOfPlayers();
     return Scaffold(
       body: Stack(
           children: <Widget>[

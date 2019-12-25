@@ -60,6 +60,12 @@ class DatabaseHelper {
         version: _databaseVersion, onCreate: _onCreate);
   }
 
+  deleteEntireDatabase() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, _databaseName);
+    await deleteDatabase(path);
+  }
+
   // SQL string to create the database
   Future _onCreate(Database db, int version) async {
     await db.execute('''
@@ -72,10 +78,17 @@ class DatabaseHelper {
 
   // Database helper methods:
 
-  Future<int> insert(Player player) async {
+  Future<int> insert(String username) async {
+    Player player = Player();
+    player.username = username[0].toUpperCase() + username.substring(1);
     Database db = await database;
     int id = await db.insert(tablePlayers, player.toMap());
     return id;
+  }
+
+  Future<List<Map>> queryPlayerAll() async {
+    Database db = await database;
+    return await db.rawQuery('SELECT * FROM $tablePlayers');
   }
 
   Future<Player> queryPlayerById(int id) async {
@@ -107,8 +120,4 @@ class DatabaseHelper {
     return Sqflite.firstIntValue(
         await db.rawQuery('SELECT COUNT(*) FROM $tablePlayers'));
   }
-
-  // TODO: queryAllWords()
-  // TODO: delete(int id)
-  // TODO: update(Word word)
 }
