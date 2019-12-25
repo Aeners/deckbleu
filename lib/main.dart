@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/screens/menu/index.dart';
-import 'package:app/screens/users/create.dart';
+import 'package:app/screens/users/create/index.dart';
 import 'package:app/screens/game/index.dart';
 import 'package:app/screens/settings/index.dart';
 

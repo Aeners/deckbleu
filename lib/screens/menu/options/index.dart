@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:app/screens/menu/options/entry.dart';
 
 class MenuOptions extends StatelessWidget {
+  MenuOptions({@required this.canPlay});
+
+  final bool canPlay;
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -17,9 +21,9 @@ class MenuOptions extends StatelessWidget {
                         pathToNavigate: '/users/create',
                         value: "Creer un joueur"),
                     OptionsEntry(
-                      pathToNavigate: '/game',
-                      value: "Lancer une partie",
-                    ),
+                        pathToNavigate: '/game',
+                        value: "Lancer une partie",
+                        disabled: !canPlay),
                     OptionsEntry(
                       pathToNavigate: '/settings',
                       value: "Parametres",
