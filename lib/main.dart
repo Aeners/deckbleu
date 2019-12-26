@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/screens/menu/index.dart';
 import 'package:app/screens/users/create/index.dart';
-import 'package:app/screens/game/create.dart';
+import 'package:app/screens/games/create/index.dart';
 import 'package:app/screens/settings/index.dart';
 
 void main() => runApp(App());

@@ -86,9 +86,15 @@ class DatabaseHelper {
     return id;
   }
 
-  Future<List<Map>> queryPlayerAll() async {
+  Future<List<Player>> queryPlayerAll() async {
     Database db = await database;
-    return await db.rawQuery('SELECT * FROM $tablePlayers');
+    List<Map> maps = await db.rawQuery('SELECT * FROM $tablePlayers');
+    if (maps.length > 0) {
+      return maps.map((Map<String, dynamic> player) {
+        return Player.fromMap(player);
+      }).toList();
+    }
+    return null;
   }
 
   Future<Player> queryPlayerById(int id) async {

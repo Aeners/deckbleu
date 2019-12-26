@@ -21,7 +21,7 @@ class MenuOptions extends StatelessWidget {
                         pathToNavigate: '/users/create',
                         value: "Creer un joueur"),
                     OptionsEntry(
-                        pathToNavigate: '/game/create',
+                        pathToNavigate: '/games/create',
                         value: "Lancer une partie",
                         disabled: !canPlay),
                     OptionsEntry(
