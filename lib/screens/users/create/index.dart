@@ -4,6 +4,8 @@ import 'package:app/screens/users/create/form.dart';
 import 'package:app/utils/db.dart';
 
 class CreatePlayerScreen extends StatefulWidget {
+  static const routeName = '/users/create';
+
   @override
   _CreatePlayerScreenState createState() => _CreatePlayerScreenState();
 }

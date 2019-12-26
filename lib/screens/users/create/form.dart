@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:math';
 
 const List<String> possibleSubmitValues = [
@@ -77,6 +78,9 @@ class _FormPlayerState extends State<FormPlayer>
         children: <Widget>[
           TextFormField(
             controller: usernameController,
+            inputFormatters: [
+              new LengthLimitingTextInputFormatter(15),
+            ],
             onChanged: _handleTextChange,
             style: TextStyle(
                 fontSize: 25.0, color: Theme.of(context).primaryColor),

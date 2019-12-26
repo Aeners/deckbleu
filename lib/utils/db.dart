@@ -13,7 +13,8 @@ class Player {
   int id;
   String username;
 
-  Player();
+  Player(username)
+      : username = username[0].toUpperCase() + username.substring(1);
 
   // convenience constructor to create a Player object
   Player.fromMap(Map<String, dynamic> map) {
@@ -79,8 +80,7 @@ class DatabaseHelper {
   // Database helper methods:
 
   Future<int> insert(String username) async {
-    Player player = Player();
-    player.username = username[0].toUpperCase() + username.substring(1);
+    Player player = Player(username);
     Database db = await database;
     int id = await db.insert(tablePlayers, player.toMap());
     return id;

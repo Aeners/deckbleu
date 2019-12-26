@@ -4,6 +4,8 @@ import 'package:app/screens/menu/options/index.dart';
 import 'package:app/utils/db.dart';
 
 class MenuScreen extends StatefulWidget {
+  static const routeName = '/';
+
   @override
   _MenuScreen createState() => _MenuScreen();
 }
